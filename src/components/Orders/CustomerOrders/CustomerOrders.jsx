@@ -23,7 +23,6 @@ const CustomerOrders = () => {
   }, []);
 
   const handleConfirm = (pid, uid, price, size, date, time) => {
-    console.log(pid, uid, price, size, date, time);
     const cartInfo = {
       pid,
       uid,
@@ -34,8 +33,7 @@ const CustomerOrders = () => {
       confirm: true,
     };
 
-    axios.post("https://package-server.vercel.app/add-to-cart", cartInfo).then((res) => {
-      console.log("Successfully posted:", res.data);
+    axios.post("http://localhost:3000/add-to-cart", cartInfo).then((res) => {
       if (res.data.insertedId) {
         toast.success("Order Confirmed");
 

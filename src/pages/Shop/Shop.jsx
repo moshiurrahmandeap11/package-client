@@ -16,7 +16,7 @@ const Shop = () => {
 
   useEffect(() => {
     axios
-      .get("https://package-server.vercel.app/products")
+      .get("http://localhost:3000/products")
       .then((res) => {
         console.log(res.data);
         setProducts(res.data);

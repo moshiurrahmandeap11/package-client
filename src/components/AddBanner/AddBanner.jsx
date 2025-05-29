@@ -38,7 +38,7 @@ const AddBanner = () => {
       const data = await res.json();
       const imageURL = data.data.url;
 
-      await axios.post("https://package-server.vercel.app/banner", {
+      await axios.post("http://localhost:3000/banner", {
         image: imageURL,
         title,
         subtitle,

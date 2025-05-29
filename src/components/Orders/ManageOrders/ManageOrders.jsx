@@ -12,9 +12,9 @@ const ManageOrders = () => {
     const fetchOrders = async () => {
       try {
         const [cartRes, productRes, usersRes] = await Promise.all([
-          axios.get("https://package-server.vercel.app/add-to-cart"),
-          axios.get("https://package-server.vercel.app/products"),
-          axios.get("https://package-server.vercel.app/users"),
+          axios.get("http://localhost:3000/add-to-cart"),
+          axios.get("http://localhost:3000/products"),
+          axios.get("http://localhost:3000/users"),
         ]);
 
         const carts = cartRes.data;
@@ -60,7 +60,7 @@ const ManageOrders = () => {
     if (!orderToConfirm) return;
 
     try {
-      const res = await axios.post("https://package-server.vercel.app/confirm-orders", {
+      const res = await axios.post("http://localhost:3000/confirm-orders", {
         ...orderToConfirm,
         status: "Confirmed",
       });
@@ -73,7 +73,7 @@ const ManageOrders = () => {
           setRemoving(null);
         }, 500); // same as animation duration
       }
-      axios.delete(`https://package-server.vercel.app/add-to-cart/${id}`)
+      axios.delete(`http://localhost:3000/add-to-cart/${id}`)
     } catch (error) {
       console.error("Error confirming order:", error);
     }
@@ -81,11 +81,10 @@ const ManageOrders = () => {
 
   const handleDelete =  async (id) => {
      const orderToCancel = orders.find((order) => order.id === id);
-     console.log(orderToCancel);
      if (!orderToCancel) return;
 
      try {
-      const res = await axios.post("https://package-server.vercel.app/cancel-orders", {
+      const res = await axios.post("http://localhost:3000/cancel-orders", {
         ...orderToCancel,
         status: "Cancelled",
       })
@@ -97,7 +96,7 @@ const ManageOrders = () => {
           setRemoving(null)
         }, 500)
       }
-      axios.delete(`https://package-server.vercel.app/add-to-cart/${id}`)
+      axios.delete(`http://localhost:3000/add-to-cart/${id}`)
      } catch(error) {
       console.error("Error confirming order:", error)
      }

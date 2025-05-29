@@ -16,6 +16,7 @@ import TotalUsers from "../TotalUsers/TotalUsers";
 import ConfirmOrders from "../ConfirmOrders/ConfirmOrders";
 import AddRoute from "../AddRoute/AddRoute";
 import Cancallation from "../Cancallation/Cancallation";
+import AddPackageGrid from "../AddPackageGrid/AddPackageGrid";
 
 // Dummy Components
 const Dashboard = () => (
@@ -49,6 +50,7 @@ const sidebarItems = [
   { label: "Confirm Orders", icon: <MdShoppingCart /> },
   { label: "Add Route", icon: <FaPlus /> },
   { label: "Cancellation Orders", icon: <MdShoppingCart /> },
+  { label: "Add Package Grid", icon: <FaPlus /> },
   { label: "Settings", icon: <MdSettings /> },
   { label: "Logout", icon: <MdLogout /> },
 ];
@@ -87,6 +89,8 @@ const AdminDashboard = () => {
         return <AddRoute></AddRoute>;
       case "Cancellation Orders":
         return <Cancallation></Cancallation>;
+      case "Add Package Grid":
+        return <AddPackageGrid></AddPackageGrid>;
       case "Settings":
         return <Settings />;
       case "Logout":

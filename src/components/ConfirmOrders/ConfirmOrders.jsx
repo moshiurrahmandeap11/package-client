@@ -18,7 +18,7 @@ const ConfirmOrders = () => {
   };
 
   useEffect(() => {
-    axios.get('https://package-server.vercel.app/confirm-orders')
+    axios.get('http://localhost:3000/confirm-orders')
       .then((res) => {
         const uniqueOrders = getUniqueOrders(res.data);
         setConfirmed(uniqueOrders);

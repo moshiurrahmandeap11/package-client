@@ -16,7 +16,7 @@ const TotalUsers = () => {
 
   const fetchUsers = () => {
     axios
-      .get('https://package-server.vercel.app/users')
+      .get('http://localhost:3000/users')
       .then((res) => setUsers(res.data))
       .catch((err) => {
         toast.error("Couldn't fetch users 🥲");
@@ -26,8 +26,8 @@ const TotalUsers = () => {
 
   const handleDelete = async (mongoId, firebaseUid) => {
     try {
-      await axios.delete(`https://package-server.vercel.app/firebase-users/${firebaseUid}`);
-      await axios.delete(`https://package-server.vercel.app/mongo-users/${mongoId}`);
+      await axios.delete(`http://localhost:3000/firebase-users/${firebaseUid}`);
+      await axios.delete(`http://localhost:3000/mongo-users/${mongoId}`);
       toast.success('User deleted from both Firebase and MongoDB!');
       setUsers(users.filter((user) => user._id !== mongoId));
     } catch (err) {

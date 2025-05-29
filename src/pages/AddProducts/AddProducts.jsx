@@ -47,11 +47,10 @@ const AddProducts = () => {
       image: imageURL,
     };
 
-    console.log("products", product);
 
     // TODO: API call or Firebase push here
 
-    axios.post("https://package-server.vercel.app/products", product).then((res) => {
+    axios.post("http://localhost:3000/products", product).then((res) => {
       if(res.data.insertedId){
         toast.success("Product added successfully")
       } else {

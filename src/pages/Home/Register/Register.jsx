@@ -77,7 +77,7 @@ const Register = () => {
           email,
           firebaseUid,
         };
-        axios.post("https://package-server.vercel.app/users", userInfo).then((res) => {
+        axios.post("http://localhost:3000/users", userInfo).then((res) => {
           console.log(res.data);
         });
         navigate("/");
