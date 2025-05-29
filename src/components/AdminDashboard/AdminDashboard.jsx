@@ -7,7 +7,6 @@ import {
   MdShoppingCart,
 } from "react-icons/md";
 import { FaPlus } from "react-icons/fa6";
-import { motion, AnimatePresence } from "framer-motion";
 
 // Import pages
 import AddProducts from "../../pages/AddProducts/AddProducts";
@@ -136,18 +135,13 @@ const AdminDashboard = () => {
 
       {/* Main Content */}
       <main className="flex-1 p-4 md:p-8 overflow-y-auto">
-        <AnimatePresence mode="wait">
-          <motion.div
+          <div
             key={active}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.15 }}
             className="min-h-[70vh]"
           >
             {renderContent()}
-          </motion.div>
-        </AnimatePresence>
+          </div>
+
       </main>
     </div>
   );

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import axios from "axios";
 import { useAuth } from "../../hooks/Hooks";
 import Loader from "../Loader/Loading";
@@ -21,7 +20,7 @@ const Cancallation = () => {
   };
 
   useEffect(() => {
-    axios.get('http://localhost:3000/confirm-orders')
+    axios.get('https://package-server.vercel.app/confirm-orders')
       .then((res) => {
         const uniqueOrders = getUniqueOrders(res.data);
         setCartData(uniqueOrders);
@@ -39,10 +38,7 @@ const Cancallation = () => {
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
+    <div
       className="p-6"
     >
       <h2 className="text-2xl font-bold mb-4">Cancelled Orders</h2>
@@ -63,12 +59,9 @@ const Cancallation = () => {
             </tr>
           </thead>
           <tbody>
-            {cartData.map((cartItem, index) => (
-              <motion.tr
+            {cartData.map((cartItem) => (
+              <tr
                 key={cartItem._id}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.1 }}
                 className="border-b hover:bg-gray-100"
               >
                 <td className="px-4 py-2">{cartItem._id}</td>
@@ -85,12 +78,12 @@ const Cancallation = () => {
                 <td className="px-4 py-2 text-red-500 font-semibold">
                   Cancelled
                 </td>
-              </motion.tr>
+              </tr>
             ))}
           </tbody>
         </table>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

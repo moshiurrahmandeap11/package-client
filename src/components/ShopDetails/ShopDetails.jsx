@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import { motion } from "framer-motion";
 import { useAuth } from "../../hooks/Hooks";
 import Loader from "../Loader/Loading";
 import { toast } from "react-toastify";
@@ -16,7 +15,7 @@ const ShopDetails = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/products/${id}`)
+      .get(`https://package-server.vercel.app/products/${id}`)
       .then((res) => {
         setProduct(res.data);
       })
@@ -85,31 +84,22 @@ const handleAddToCart = (id) => {
   const sizePrices = product?.sizePrices;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+    <div
       className="min-h-screen bg-gradient-to-br from-green-50 to-white p-10"
     >
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
-        <motion.img
+        <img
           src={product.image}
           alt={product.name}
           className="rounded-xl shadow-md w-full h-[500px] object-cover"
-          initial={{ scale: 0.9 }}
-          animate={{ scale: 1 }}
-          transition={{ delay: 0.3 }}
         />
 
         <div>
-          <motion.h2
+          <h2
             className="text-4xl font-bold text-green-800"
-            initial={{ x: -30, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ delay: 0.4 }}
           >
             Name: {product.name}
-          </motion.h2>
+          </h2>
           <p className="text-gray-600 font-medium text-lg">
             Management: {product.brand}
           </p>
@@ -144,11 +134,8 @@ const handleAddToCart = (id) => {
 
           {/* Price & Stock Info */}
           {selectedSize && (
-            <motion.div
+            <div
               key={selectedSize.size}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
               className="mt-4 space-y-1"
             >
               <p className="text-lg font-medium text-gray-800">
@@ -167,7 +154,7 @@ const handleAddToCart = (id) => {
                     : "Out of stock"}
                 </span>
               </p>
-            </motion.div>
+            </div>
           )}
 
           <p className="text-gray-500 mt-4">
@@ -183,7 +170,7 @@ const handleAddToCart = (id) => {
           </button>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

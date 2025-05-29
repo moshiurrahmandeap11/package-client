@@ -5,13 +5,12 @@ import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Fade } from "react-awesome-reveal";
-import { motion } from "framer-motion";
 
 const Banner = () => {
   const [banners, setBanners] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3000/banner").then((res) => {
+    axios.get("https://package-server.vercel.app/banner").then((res) => {
       setBanners(res.data);
     });
   }, []);
@@ -35,10 +34,7 @@ const Banner = () => {
             >
               <div className="w-full h-full bg-black/50 flex items-center px-10">
                 <Fade direction="left" cascade triggerOnce>
-                  <motion.div
-                    initial={{ opacity: 0, x: -50 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 1 }}
+                  <div
                     className="text-white max-w-xl space-y-5"
                   >
                     <h1 className="text-4xl md:text-6xl font-bold">
@@ -54,15 +50,13 @@ const Banner = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
+                      <button
                         className="px-6 py-3 bg-green-500 text-white rounded-full shadow-lg hover:bg-green-600 transition-all"
                       >
                         {banner.buttonText || "Explore Now"}
-                      </motion.button>
+                      </button>
                     </a>
-                  </motion.div>
+                  </div>
                 </Fade>
               </div>
             </div>

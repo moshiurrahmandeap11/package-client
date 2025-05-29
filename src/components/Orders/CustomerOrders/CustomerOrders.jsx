@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import { MdDelete } from "react-icons/md";
 import { toast } from "react-toastify";
 import { Link } from "react-router"; // React Router Dom হবে এটা
@@ -35,7 +34,7 @@ const CustomerOrders = () => {
       confirm: true,
     };
 
-    axios.post("http://localhost:3000/add-to-cart", cartInfo).then((res) => {
+    axios.post("https://package-server.vercel.app/add-to-cart", cartInfo).then((res) => {
       console.log("Successfully posted:", res.data);
       if (res.data.insertedId) {
         toast.success("Order Confirmed");
@@ -62,26 +61,17 @@ const CustomerOrders = () => {
   };
 
   return (
-    <motion.div
+    <div
       className="p-4 sm:p-6 bg-gray-50 min-h-screen"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.4 }}
     >
-      <motion.h2
+      <h2
         className="text-xl sm:text-2xl md:text-3xl font-bold text-center text-blue-700 mb-6"
-        initial={{ scale: 0.8 }}
-        animate={{ scale: 1 }}
-        transition={{ delay: 0.2 }}
       >
         📦 Your Orders
-      </motion.h2>
+      </h2>
 
-      <motion.div
+      <div
         className="overflow-x-auto"
-        initial={{ y: 30, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.3 }}
       >
         <table className="min-w-full bg-white rounded-lg shadow-md overflow-hidden text-sm sm:text-base">
           <thead className="bg-blue-600 text-white">
@@ -114,12 +104,9 @@ const CustomerOrders = () => {
               </tr>
             ) : (
               cartItems.map((item, index) => (
-                <motion.tr
+                <tr
                   key={item.id || index}
                   className="hover:bg-gray-100 transition"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.4 + index * 0.05 }}
                 >
                   <td className="px-4 font-medium sm:px-6 py-4">{item.id}</td>
                   <td className="px-4 font-medium sm:px-6 py-4">{item.name}</td>
@@ -170,13 +157,13 @@ const CustomerOrders = () => {
                       />
                     )}
                   </td>
-                </motion.tr>
+                </tr>
               ))
             )}
           </tbody>
         </table>
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 };
 

@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
 import { MdDelete } from 'react-icons/md';
 import { toast } from 'react-toastify';
 import { useAuth } from '../../hooks/Hooks';
@@ -17,7 +16,7 @@ const TotalUsers = () => {
 
   const fetchUsers = () => {
     axios
-      .get('http://localhost:3000/users')
+      .get('https://package-server.vercel.app/users')
       .then((res) => setUsers(res.data))
       .catch((err) => {
         toast.error("Couldn't fetch users 🥲");
@@ -27,8 +26,8 @@ const TotalUsers = () => {
 
   const handleDelete = async (mongoId, firebaseUid) => {
     try {
-      await axios.delete(`http://localhost:3000/firebase-users/${firebaseUid}`);
-      await axios.delete(`http://localhost:3000/mongo-users/${mongoId}`);
+      await axios.delete(`https://package-server.vercel.app/firebase-users/${firebaseUid}`);
+      await axios.delete(`https://package-server.vercel.app/mongo-users/${mongoId}`);
       toast.success('User deleted from both Firebase and MongoDB!');
       setUsers(users.filter((user) => user._id !== mongoId));
     } catch (err) {
@@ -40,11 +39,8 @@ const TotalUsers = () => {
   if (loading) return <Loader />;
 
   return (
-    <motion.div
+    <div
       className="p-4 bg-gray-100 min-h-screen"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.4 }}
     >
       <h2 className="text-2xl font-bold text-center mb-6 text-blue-700">
         👥 Total Users
@@ -71,11 +67,8 @@ const TotalUsers = () => {
               </tr>
             ) : (
               users.map((user, index) => (
-                <motion.tr
+                <tr
                   key={user._id}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.2 + index * 0.05 }}
                   className="hover:bg-gray-100 transition"
                 >
                   <td className="py-3 px-4">{index + 1}</td>
@@ -95,7 +88,7 @@ const TotalUsers = () => {
                       </button>
                     )}
                   </td>
-                </motion.tr>
+                </tr>
               ))
             )}
           </tbody>
@@ -108,12 +101,9 @@ const TotalUsers = () => {
           <p className="text-center text-gray-500">No users found 😶</p>
         ) : (
           users.map((user, index) => (
-            <motion.div
+            <div
               key={user._id}
               className="bg-white rounded-lg shadow-md p-4"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 + index * 0.05 }}
             >
               <div className="flex justify-between mb-2">
                 <span className="font-semibold text-gray-600">#{index + 1}</span>
@@ -130,11 +120,11 @@ const TotalUsers = () => {
               <p><span className="font-semibold">Name:</span> {user.name}</p>
               <p><span className="font-semibold">Email:</span> {user.email}</p>
               <p><span className="font-semibold">Role:</span> {user.email === ADMIN_EMAIL ? 'admin' : user.role || 'user'}</p>
-            </motion.div>
+            </div>
           ))
         )}
       </div>
-    </motion.div>
+    </div>
   );
 };
 

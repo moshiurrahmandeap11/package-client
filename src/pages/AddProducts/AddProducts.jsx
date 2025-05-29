@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
 import { useAuth } from "../../hooks/Hooks";
 import Error from "../Error/Error";
 import Loader from "../../components/Loader/Loading";
@@ -52,7 +51,7 @@ const AddProducts = () => {
 
     // TODO: API call or Firebase push here
 
-    axios.post("http://localhost:3000/products", product).then((res) => {
+    axios.post("https://package-server.vercel.app/products", product).then((res) => {
       if(res.data.insertedId){
         toast.success("Product added successfully")
       } else {
@@ -98,17 +97,10 @@ const AddProducts = () => {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+    <div
       className=" flex items-center justify-center bg-gradient-to-br from-green-50 to-white px-4 py-10"
     >
-      <motion.div
-        initial={{ scale: 0.95 }}
-        animate={{ scale: 1 }}
-        transition={{ delay: 0.1 }}
+      <div
         className="w-full max-w-3xl bg-white shadow-xl rounded-xl p-8 border border-gray-200"
       >
         <h2 className="text-2xl font-bold text-center text-green-600 mb-6">
@@ -266,17 +258,15 @@ const AddProducts = () => {
           </div>
 
           {/* Submit */}
-          <motion.button
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
+          <button
             type="submit"
             className="w-full bg-green-600 text-white py-2 px-4 rounded-md transition hover:bg-green-700 font-semibold"
           >
             Add Product
-          </motion.button>
+          </button>
         </form>
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 };
 

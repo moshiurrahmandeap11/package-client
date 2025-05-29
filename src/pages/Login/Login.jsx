@@ -1,7 +1,6 @@
 import React from "react";
 import { Player } from "@lottiefiles/react-lottie-player";
 import { Slide } from "react-awesome-reveal";
-import { motion } from "framer-motion";
 import loginAnimation from "../../assets/lotties/login.json";
 import { Link, useLocation, useNavigate } from "react-router";
 import { useAuth } from "../../hooks/Hooks";
@@ -90,13 +89,11 @@ const Login = () => {
                   placeholder="password"
                 />
               </div>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+              <button
                 className="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 transition"
               >
                 Log In
-              </motion.button>
+              </button>
             </form>
             <p className="mt-4 text-sm text-gray-600">
               Don't have an account?{" "}

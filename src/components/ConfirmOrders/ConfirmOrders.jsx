@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
 
 const ConfirmOrders = () => {
   const [confirmed, setConfirmed] = useState([]);
@@ -19,7 +18,7 @@ const ConfirmOrders = () => {
   };
 
   useEffect(() => {
-    axios.get('http://localhost:3000/confirm-orders')
+    axios.get('https://package-server.vercel.app/confirm-orders')
       .then((res) => {
         const uniqueOrders = getUniqueOrders(res.data);
         setConfirmed(uniqueOrders);
@@ -33,10 +32,7 @@ const ConfirmOrders = () => {
   }, []);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
+    <div
       className="p-6 min-h-screen bg-gray-100"
     >
       <h2 className="text-3xl font-bold mb-6 text-center text-green-700">
@@ -65,11 +61,8 @@ const ConfirmOrders = () => {
               </tr>
             ) : confirmed.length > 0 ? (
               confirmed.map((order, index) => (
-                <motion.tr
+                <tr
                   key={order.id || index}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.05 }}
                   className="border-b hover:bg-gray-50"
                 >
                   <td className="px-6 py-4">{order.user}</td>
@@ -85,7 +78,7 @@ const ConfirmOrders = () => {
                       {order.status}
                     </span>
                   </td>
-                </motion.tr>
+                </tr>
               ))
             ) : (
               <tr>
@@ -97,7 +90,7 @@ const ConfirmOrders = () => {
           </tbody>
         </table>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Player } from "@lottiefiles/react-lottie-player";
 import { Slide } from "react-awesome-reveal";
-import { motion } from "framer-motion";
 import registerAnimation from "../../../assets/lotties/register.json";
 import { useAuth } from "../../../hooks/Hooks";
 import { useNavigate } from "react-router";
@@ -78,10 +77,10 @@ const Register = () => {
           email,
           firebaseUid,
         };
-        axios.post("http://localhost:3000/users", userInfo).then((res) => {
+        axios.post("https://package-server.vercel.app/users", userInfo).then((res) => {
           console.log(res.data);
         });
-        navigate("/login", { state: { email: result.user.email } });
+        navigate("/");
         toast.warn("Verification email sent! Check your inbox.");
       } catch (err) {
         console.log(err);
@@ -183,14 +182,12 @@ const Register = () => {
                 )}
               </div>
 
-              <motion.button
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
+              <button
                 className="w-full bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition duration-300"
                 type="submit"
               >
                 Register
-              </motion.button>
+              </button>
             </form>
 
             <p className="mt-6 text-sm text-center text-green-700">

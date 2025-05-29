@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "../../hooks/Hooks";
 import CustomerOrders from "../../components/Orders/CustomerOrders/CustomerOrders";
 import Loader from "../../components/Loader/Loading";
@@ -32,23 +31,17 @@ const Dashboard = () => {
     switch (activeTab) {
       case "orders":
         return (
-          <motion.div
+          <div
             key="orders"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0 }}
           >
             <h3 className="text-2xl font-semibold mb-4">🛒 Recent Orders</h3>
             <CustomerOrders />
-          </motion.div>
+          </div>
         );
       case "wishlist":
         return (
-          <motion.div
+          <div
             key="wishlist"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0 }}
           >
             <h3 className="text-2xl font-semibold mb-4">❤️ Wishlist</h3>
             <ul className="space-y-2">
@@ -65,47 +58,38 @@ const Dashboard = () => {
                 </button>
               </li>
             </ul>
-          </motion.div>
+          </div>
         );
       case "billing":
         return (
-          <motion.div
+          <div
             key="billing"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0 }}
           >
             <h3 className="text-2xl font-semibold mb-4">💳 Billing Info</h3>
             <p className="text-gray-700">Last Payment: ৳2,200 on 25 May 2025</p>
             <p className="text-gray-700">Payment Method: bKash</p>
-          </motion.div>
+          </div>
         );
       case "profile":
         return (
-          <motion.div
+          <div
             key="profile"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0 }}
           >
             <h1 className="text-2xl font-bold mb-2">👤 My Profile</h1>
             <p>Name: {user?.displayName}</p>
             <p>Email: {user?.email}</p>
-          </motion.div>
+          </div>
         );
       case "logout":
         return (
-          <motion.div
+          <div
             key="logout"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0 }}
             className="text-center"
           >
             <button className="bg-red-600 text-white px-6 py-2 rounded-full hover:bg-red-700 transition">
               🔒 Confirm Logout
             </button>
-          </motion.div>
+          </div>
         );
       default:
         return null;
@@ -138,7 +122,7 @@ const Dashboard = () => {
 
       {/* Content Area */}
       <main className="flex-1 p-8">
-        <AnimatePresence mode="wait">{renderContent()}</AnimatePresence>
+        {renderContent()}
       </main>
     </div>
   );

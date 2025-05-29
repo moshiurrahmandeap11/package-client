@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
 import Loader from "../../Loader/Loading";
 
@@ -13,9 +12,9 @@ const ManageOrders = () => {
     const fetchOrders = async () => {
       try {
         const [cartRes, productRes, usersRes] = await Promise.all([
-          axios.get("http://localhost:3000/add-to-cart"),
-          axios.get("http://localhost:3000/products"),
-          axios.get("http://localhost:3000/users"),
+          axios.get("https://package-server.vercel.app/add-to-cart"),
+          axios.get("https://package-server.vercel.app/products"),
+          axios.get("https://package-server.vercel.app/users"),
         ]);
 
         const carts = cartRes.data;
@@ -57,12 +56,11 @@ const ManageOrders = () => {
   }, []);
 
   const handleConfirm = async (id) => {
-    console.log(id);
     const orderToConfirm = orders.find((order) => order.id === id);
     if (!orderToConfirm) return;
 
     try {
-      const res = await axios.post("http://localhost:3000/confirm-orders", {
+      const res = await axios.post("https://package-server.vercel.app/confirm-orders", {
         ...orderToConfirm,
         status: "Confirmed",
       });
@@ -75,7 +73,7 @@ const ManageOrders = () => {
           setRemoving(null);
         }, 500); // same as animation duration
       }
-      axios.delete(`http://localhost:3000/add-to-cart/${id}`)
+      axios.delete(`https://package-server.vercel.app/add-to-cart/${id}`)
     } catch (error) {
       console.error("Error confirming order:", error);
     }
@@ -87,7 +85,7 @@ const ManageOrders = () => {
      if (!orderToCancel) return;
 
      try {
-      const res = await axios.post("http://localhost:3000/cancel-orders", {
+      const res = await axios.post("https://package-server.vercel.app/cancel-orders", {
         ...orderToCancel,
         status: "Cancelled",
       })
@@ -99,7 +97,7 @@ const ManageOrders = () => {
           setRemoving(null)
         }, 500)
       }
-      axios.delete(`http://localhost:3000/add-to-cart/${id}`)
+      axios.delete(`https://package-server.vercel.app/add-to-cart/${id}`)
      } catch(error) {
       console.error("Error confirming order:", error)
      }
@@ -108,10 +106,7 @@ const ManageOrders = () => {
   if (loading) return <Loader />;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
+    <div
       className="p-6 min-h-screen bg-gray-100"
     >
       <h2 className="text-3xl font-bold mb-6 text-center text-green-700">
@@ -135,15 +130,10 @@ const ManageOrders = () => {
             </tr>
           </thead>
           <tbody>
-            <AnimatePresence>
               {orders.length > 0 ? (
                 orders.map((order) => (
-                  <motion.tr
+                  <tr
                     key={order.id}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: 200 }}
-                    transition={{ duration: 0.5 }}
                     className="border-b hover:bg-gray-50"
                   >
                     <td className="px-6 py-4">{order.user}</td>
@@ -187,24 +177,20 @@ const ManageOrders = () => {
                         </>
                       )}
                     </td>
-                  </motion.tr>
+                  </tr>
                 ))
               ) : (
-                <motion.tr
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
+                <tr
                 >
                   <td colSpan={10} className="text-center text-gray-500 py-8 text-lg">
                     🚫 No Customer Orders Found
                   </td>
-                </motion.tr>
+                </tr>
               )}
-            </AnimatePresence>
           </tbody>
         </table>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
